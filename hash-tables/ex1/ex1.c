@@ -8,6 +8,28 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
   HashTable *ht = create_hash_table(16);
 
   // YOUR CODE HERE
+  // create answer
+  Answer *answer = malloc(sizeof(Answer));
+
+
+   // for loop to traverse indexes
+  for (int i = 0; i < length; i++)
+  {
+    int index_2 = hash_table_retrieve(ht, limit - weights[i]);
+  
+    if (index_2 != -1)
+    {
+      answer->index_1 = i;
+      answer->index_2 = index_2;
+      return answer;
+    }
+    else
+    {
+      hash_table_insert(ht, weights[i], i);
+    }
+  }
+  // free
+  destroy_hash_table(ht);
 
   return NULL;
 }
